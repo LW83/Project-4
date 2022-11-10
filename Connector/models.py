@@ -15,7 +15,7 @@ class Profiles(models.Model):
     profile_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, db_column="Profile ID")
     profile_added = models.DateField(auto_now_add=True, db_column="Date Added")
     last_updated = models.DateField(auto_now=True, db_column="Last Updated")
-    pound = models.ForeignKey(Pound_User, on_delete=models.CASCADE, related_name='dog_profiles', db_column="Pound")
+    pound = models.ForeignKey(User, on_delete=models.CASCADE, related_name='dog_profiles', db_column="Pound")
     dog_breed = models.CharField(max_length=150, unique=False, db_column="Breed")
     gender = models.IntegerField(choices=GENDER, default=0, db_column="Gender")
     approx_age = models.CharField(max_length=50, unique=False, db_column="Approximate Age")
@@ -37,7 +37,8 @@ RESERVED = ((0, ""), (1, "Reserved for Collection"))
 
 class Reservations(models.Model):
     profile = models.ForeignKey(Profiles, on_delete=models.CASCADE, related_name='Reserve Pet')
-    rescue = models.ForeignKey(Rescue_User, on_delete=models.CASCADE, related_name='Rescue')
+    status = models.IntegerField(choices=RESERVED, default=0, db_column="Status")
+    rescue = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Rescue')
     collection_date = models.DateField(db_column="Collection Date")
     last_updated = models.DateField(auto_now=True, db_column="Last Updated")
     comment = models.TextField()
