@@ -10,7 +10,7 @@ MICROCHIPPED = ((0, "Yes"), (1, "No"), (2, "Unknown"))
 CIRCUMSTANCE = ((0, "Stray"), (1, "Surrender"), (2, "Seized"), (3, "Other"))
 GENDER = ((0, "Male"), (1, "Female"))
 
-class Profiles(models.Model):
+class Profile(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
     profile_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     profile_added = models.DateField(auto_now_add=True)
@@ -33,7 +33,7 @@ class Profiles(models.Model):
 RESERVED = ((0, ""), (1, "Reserved for Collection"))
 
 class Reservations(models.Model):
-    profile = models.ForeignKey(Profiles, on_delete=models.CASCADE, related_name='reserve_pet')
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='reserve_pet')
     status = models.IntegerField(choices=RESERVED, default=0)
     rescue = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Rescue')
     collection_date = models.DateField()
