@@ -10,6 +10,7 @@ MICROCHIPPED = ((0, "Yes"), (1, "No"), (2, "Unknown"))
 CIRCUMSTANCE = ((0, "Stray"), (1, "Surrender"), (2, "Seized"), (3, "Other"))
 GENDER = ((0, "Male"), (1, "Female"))
 
+
 class Profile(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
     profile_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -27,10 +28,12 @@ class Profile(models.Model):
     status = models.IntegerField(choices=STATUS, default=0)
     urgency = models.IntegerField(choices=URGENCY, default=2)
 
-    class Meta: 
+    class Meta:
         ordering = ['-urgency', 'profile_added']
 
+
 RESERVED = ((0, ""), (1, "Reserved for Collection"))
+
 
 class Reservations(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='reserve_pet')
@@ -39,7 +42,3 @@ class Reservations(models.Model):
     collection_date = models.DateField()
     last_updated = models.DateField(auto_now=True)
     comment = models.TextField()
-
-
-    
-
