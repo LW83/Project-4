@@ -35,10 +35,10 @@ class Profile(models.Model):
 RESERVED = ((0, ""), (1, "Reserved for Collection"))
 
 
-class Reservations(models.Model):
+class Reservation(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='reserve_pet')
     status = models.IntegerField(choices=RESERVED, default=0)
     rescue = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Rescue')
     collection_date = models.DateField()
     last_updated = models.DateField(auto_now=True)
-    comment = models.TextField()
+    # approved = models.BooleanField(default=False)

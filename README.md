@@ -1,1 +1,2 @@
 https://www.youtube.com/watch?v=AUZRlsrfA7s - creating Unique profile ID in django model set up
+https://stackoverflow.com/questions/73080227/render-label-names-instead-of-integer-fields-in-django-templates - displaying names and not choice integer

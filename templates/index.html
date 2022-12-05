@@ -3,7 +3,8 @@
 {% block content %}
 
 <h1>Current Dogs Requiring Placement</h1>
-<table>
+<table class="table table-hover table-bordered table-sm">
+    <caption>List of Dogs in Pounds Looking for Placement</caption>
     <tr>
         <th>Profile ID</th><th>Date Added</th><th>Last Updated</th>
         <th>Pound</th><th>Breed</th><th>Gender</th><th>Appox Age</th>
@@ -18,15 +19,15 @@
             <td>{{ Profile.last_update }}</td>
             <td>{{ Profile.pound }}</td>
             <td>{{ Profile.dog_breed }}</td>
-            <td>{{ Profile.gender }}</td>
-            <td>{{ Profile.approx_age }}</td>
-            <td>{{ Profile.neutered }}</td>
-            <td>{{ Profile.microchipped }}</td>
-            <td>{{ Profile.circumstance }}</td>
+            <td>{{ Profile.get_gender_display }}</td>
+            <td>{{ Profile.get_approx_age_display }}</td>
+            <td>{{ Profile.get_neutered_display }}</td>
+            <td>{{ Profile.get_microchipped_display }}</td>
+            <td>{{ Profile.get_circumstance_display }}</td>
             <td>{{ Profile.pound_entry }}</td>
             <td>{{ Profile.hold_date }}</td>
-            <td>{{ Profile.status }}</td>
-            <td>{{ Profile.urgency }}</td>
+            <td>{{ Profile.get_status_display }}</td>
+            <td>{{ Profile.get_urgency_display }}</td>
         </tr>
     {% endfor %}
 </table>
