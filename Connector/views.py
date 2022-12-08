@@ -1,13 +1,33 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic, View
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Profile, Reservation
+from .forms import ProfileForm
 
 
-class ProfileList(generic.ListView):
+class ProfileList(LoginRequiredMixin, generic.ListView):
     model = Profile
     queryset = Profile.objects.filter(status=0) | Profile.objects.filter(status=1)
+    context_object_name = 'profiles'
     template_name = 'index.html'
     paginate_by = 50
+
+
+def homeview(request):
+    return render(request, 'home.html',)
+
+
+# class CreateProfile(LoginRequiredMixin, generic.CreateView):
+#     def get(self, request, *args, **kwargs):
+
+#         return render(
+#             request,
+#             "create_profile.html",
+#             {
+#                 "profile_form": ProfileForm(),
+#                 # "viewer_access": check_viewer_exists(request)
+#             }
+#         )
 
 
 # class ProfileReservation(View):

@@ -1,7 +1,8 @@
 import uuid
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
 from cloudinary.models import CloudinaryField
+from django.urls import reverse
 
 STATUS = ((0, "Hold"), (1, "Available"), (2, "Booked"), (3, "Transferred to Rescue"), (4, "Rehomed"), (5, "Reclaimed"), (6, "PTS"), (7, "Death Natural Causes"))
 URGENCY = ((0, "Red"), (1, "Amber"), (2, "Green"))
@@ -9,6 +10,14 @@ NEUTERED = ((0, "Yes"), (1, "No"), (2, "Unknown"))
 MICROCHIPPED = ((0, "Yes"), (1, "No"), (2, "Unknown"))
 CIRCUMSTANCE = ((0, "Stray"), (1, "Surrender"), (2, "Seized"), (3, "Other"))
 GENDER = ((0, "Male"), (1, "Female"))
+
+
+# class User(AbstractUser):
+#     '''
+#     From Simple is Better blog - see ReadMe
+#     '''    
+#     is_pound = models.BooleanField('pound status', default=False)
+#     is_rescue = models.BooleanField('rescue status', default=False)
 
 
 class Profile(models.Model):
@@ -30,6 +39,10 @@ class Profile(models.Model):
 
     class Meta:
         ordering = ['-urgency', 'profile_added']
+    
+
+    def get_absolute_url(self):
+        return reverse('profile_id', kwargs={'pk': self.pk})
 
 
 RESERVED = ((0, ""), (1, "Reserved for Collection"))
