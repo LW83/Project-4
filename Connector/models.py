@@ -12,12 +12,12 @@ CIRCUMSTANCE = ((0, "Stray"), (1, "Surrender"), (2, "Seized"), (3, "Other"))
 GENDER = ((0, "Male"), (1, "Female"))
 
 
-# class User(AbstractUser):
-#     '''
-#     From Simple is Better blog - see ReadMe
-#     '''    
-#     is_pound = models.BooleanField('pound status', default=False)
-#     is_rescue = models.BooleanField('rescue status', default=False)
+class User(AbstractUser):
+    '''
+    From Simple is Better blog - see ReadMe
+    '''    
+    is_pound = models.BooleanField('pound status', default=False)
+    is_rescue = models.BooleanField('rescue status', default=False)
 
 
 class Profile(models.Model):
@@ -54,4 +54,4 @@ class Reservation(models.Model):
     rescue = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Rescue')
     collection_date = models.DateField()
     last_updated = models.DateField(auto_now=True)
-    # approved = models.BooleanField(default=False)
+    # approved = models.BooleanField('Booking Accepted', default=False)
